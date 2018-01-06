@@ -1,0 +1,49 @@
+http://timepasstechies.com/mapreduce-example-get-input-data-external-source-mysql/
+
+https://archanaschangale.wordpress.com/2013/09/26/database-access-with-apache-hadoop/
+
+/home/orienit/work/Inputs/EventLog
+
+2013-11-24T19:08:21|109.37.14.60|DE|SUCCESS
+
+create table EventLog (dt VARCHAR(1024), ipaddr VARCHAR(1024), country VARCHAR(1024), status VARCHAR(1024)); 
+
+sqoop import \
+  --connect "jdbc:mysql://localhost:3306/kalyan" \
+  --username=root \
+  --password=hadoop \
+  --table EventLog \
+  --target-dir=/home/orienit/work/Inputs/EventLog \
+  --delete-target-dir \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --as-textfile \
+  --num-mappers 1
+
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','109.37.14.60', 'IN', 'SUCCESS')
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','104.148.84.229', 'GB', 'SUCCESS');
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','180.208.138.59', 'US', 'SUCCESS');
+INSERT INTO EventLog VALUES('2013-11-26T19:08:21','220.157.100.115', 'MZ', 'SUCCESS');
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','189.89.146.110', 'FR', 'ERROR');
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','109.37.14.60', 'DE', 'ERROR');
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','104.148.84.229', 'GB', 'ERROR');
+INSERT INTO EventLog VALUES('2013-11-24T19:08:21','180.208.138.59', 'US', 'ERROR');
+INSERT INTO EventLog VALUES('2013-11-26T19:08:21','220.157.100.115', 'MZ', 'ERROR');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
