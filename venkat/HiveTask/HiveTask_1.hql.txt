@@ -1,0 +1,73 @@
+CREATE DATABASE kalyan;
+
+create xml table:::
+--------------------
+ADD jar /home/orienit/hive-json.jar;
+
+CREATE EXTERNAL TABLE employee1_json(
+empid INT ,
+name  STRING ,
+salary FLOAT ,
+dept  STRING
+)
+ROW FORMAT SERDE "org.apache.hadoop.hive.contrib.serde2.JsonSerde"
+LOCATION '/hive/warehouse/json_data';
+
+describe formatted employee1_json;
+
+LOAD DATA LOCAL INPATH '/home/orienit/employee1.json'OVERWRITE INTO TABLE employee1_json;
+
+select * from employee1_json where empid>2 AND dept='dev';
+
+
+
+
+
+
+create xml table:::
+--------------------
+CREATE XML TABLE::::
+
+create table employee1_xml(str string);
+
+LOCATION '/hive/warehouse/xml_data;
+
+LOAD DATA LOCAL INPATH '/home/orienit/employee1.xml'OVERWRITE INTO TABLE employee1_xml;
+
+select xpath(str,'/employee/empid/text()') ,xpath(str,'/employee/name/text()') ,xpath(str,'/employee/salary/text()') ,xpath(str,'/employee/dept/text()') from employee1_xml ;
+
+
+describe formatted employee1_xml;
+
+
+select * from employee1_xml;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
