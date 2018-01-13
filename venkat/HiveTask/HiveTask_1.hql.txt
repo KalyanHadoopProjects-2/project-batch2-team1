@@ -1,6 +1,6 @@
 CREATE DATABASE kalyan;
 
-create xml table:::
+create json table:::
 --------------------
 ADD jar /home/orienit/hive-json.jar;
 
