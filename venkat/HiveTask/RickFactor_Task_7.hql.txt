@@ -1,0 +1,17 @@
+
+create Parttition table::
+-------------------------
+create table RickFactor(YearEnd INT, LocationAbbr STRING, Datasource STRING, Class STRING, Topic STRING, Question STRING, Data_Value_Unit STRING, Data_Value_Type STRING, Data_Value FLOAT, Data_Value_Alt FLOAT, Data_Value_Footnote_Symbol STRING, Data_Value_Footnote STRING, Low_Confidence_Limit FLOAT, High_Confidence_Limit FLOAT, Sample_Size STRING, Total STRING, Age_years STRING, Education STRING, Gender STRING, Income STRING, RaceorEthnicity STRING, ClassID STRING, TopicID STRING, QuestionID STRING, DataValueTypeID STRING, LocationID INT, StratificationCategory1 STRING, Stratification1 STRING, StratificationCategoryId1 STRING, StratificationID1 STRING)
+partitioned by (YearStart STRING, LocationDesc STRING, GeoLocation STRING)
+row format delimited 
+fields terminated by ',';
+
+
+loading:::
+
+LOAD DATA LOCAL INPATH '/home/orienit/Behavioral_Risk_Factor_Surveillance_System.csv'OVERWRITE INTO TABLE RickFactor PARTITION(YearStart='YearStart',LocationDesc='LocationDesc',GeoLocation='GeoLocation');
+
+
+ 
+select *  from RickFactor where  Sample_size<=1000 AND 40<Age_years<50 limit 5;
+
