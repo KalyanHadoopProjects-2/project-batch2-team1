@@ -1,3 +1,6 @@
+add jar /home/orienit/other/hivexmlserde-1.0.5.3.jar;
+
+
 CREATE TABLE employee3_xml(empid int, name string, salary float, dept string,address string,pincode bigint )
 ROW FORMAT SERDE 'com.ibm.spss.hive.serde2.xml.XmlSerDe'
 WITH SERDEPROPERTIES (
@@ -16,7 +19,7 @@ TBLPROPERTIES (
 "xmlinput.end"="</employee>"
 );
 
-add jar /home/orienit/other/hivexmlserde-1.0.5.3.jar;
+
 LOAD DATA LOCAL INPATH '/home/orienit/other/employee3.xml'OVERWRITE INTO TABLE employee3_xml;
 
 select *  from employee3_xml where empid>2 AND dept='dev';
