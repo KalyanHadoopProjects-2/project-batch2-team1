@@ -1,7 +1,7 @@
 add jar /home/orienit/other/hivexmlserde-1.0.5.3.jar;
 
 
-CREATE TABLE employee3_xml(empid int, name string, salary float, dept string,address string,pincode bigint,address1 string,pincode1 bigint )
+CREATE TABLE employee4_xml(empid int, name string, salary float, dept string,address string,pincode bigint,address1 string,pincode1 bigint )
 ROW FORMAT SERDE 'com.ibm.spss.hive.serde2.xml.XmlSerDe'
 WITH SERDEPROPERTIES (
 "column.xpath.empid"="/employee/empid/text()",
@@ -22,6 +22,6 @@ TBLPROPERTIES (
 );
 
 
-LOAD DATA LOCAL INPATH '/home/orienit/other/employee3.xml'OVERWRITE INTO TABLE employee3_xml;
+LOAD DATA LOCAL INPATH '/home/orienit/other/employee4.xml'OVERWRITE INTO TABLE employee4_xml;
 
-select *  from employee3_xml ;
+select *  from employee4_xml ;
