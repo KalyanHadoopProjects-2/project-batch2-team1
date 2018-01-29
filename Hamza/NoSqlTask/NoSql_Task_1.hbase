@@ -1,0 +1,32 @@
+create 'employee1_csv' , 'cf'
+
+scan 'employee1_csv'
+
+hdfs dfs -put /home/orienit/other/employee1.csv /user/orienit/hbase
+
+----------------------------------------------------------------------
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,cf:name,cf:salary,cf:dept -Dimporttsv.separator=, 'employee1_csv' hdfs://localhost:8020/user/orienit/hbase/employee1.csv
+
+HADOOP_CLASSPATH=`${HBASE_HOME}/bin/hbase classpath` ${HADOOP_HOME}/bin/hadoop jar ${HBASE_HOME}/lib/hbase-server-1.2.0-cdh5.12.0.jar importtsv -Dimporttsv.separator=, -Dimporttsv.columns=HBASE_ROW_KEY,cf:name,cf:salary,cf:dept 'employee1_csv' hdfs://localhost:8020/user/orienit/hbase/employee1.csv
+
+
+
+
+
+
+
+create 'employee1_Tsv', 'cf'
+hdfs dfs -mkdir /user/orienit/hbase
+
+ describe 'employee1_Tsv'
+scan employee1_Tsv
+
+hdfs dfs -put /home/orienit/other/employee1.tsv /user/orienit/hbase
+
+----------------------------------------------------
+
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,cf:c1,cf:c2,cf:c3 -Dimporttsv.separator='\t' employee1_Tsv hdfs://localhost:8020/user/orienit/hbase/employee1.tsv
+
+HADOOP_CLASSPATH=`${HBASE_HOME}/bin/hbase classpath` ${HADOOP_HOME}/bin/hadoop jar ${HBASE_HOME}/lib/hbase-server-1.2.0-cdh5.12.0.jar importtsv -Dimporttsv.columns=HBASE_ROW_KEY,cf:c1,cf:c2,cf:c3 employee1_Tsv hdfs://localhost:8020/user/orienit/hbase/employee1.tsv
+
+----------------------------------------------------
