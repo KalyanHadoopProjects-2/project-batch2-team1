@@ -1,48 +1,45 @@
-twitter-agent.sources = Twitter
-twitter-agent.channels = MemChannel
-twitter-agent.sinks = HDFS
-twitter-agent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSour
-twitter-agent.sources.Twitter.channels = MemChannel
-twitter-agent.sources.Twitter.consumerKey =*******
-twitter-agent.sources.Twitter.consumerSecret =*******
-twitter-agent.sources.Twitter.accessToken =*******
-twitter-agent.sources.Twitter.accessTokenSecret =**********
-twitter-agent.sources.Twitter.keywords = hadoop, big data, analytics, bigdata, cuse, data warehousing, mahout, hbase, nosql, newsql, businessintelligence, cloud
-twitter-agent.sinks.HDFS.channel = MemChannel
-twitter-agent.sinks.HDFS.type = hdfs
-twitter-agent.sinks.HDFS.hdfs.path = hdfs://localhost:8020/user/orienit/flume/tweets
-twitter-agent.sinks.HDFS.hdfs.fileType = DataStream
-twitter-agent.sinks.HDFS.hdfs.writeFormat = Json
-twitter-agent.sinks.HDFS.hdfs.batchSize = 1000
-twitter-agent.sinks.HDFS.hdfs.rollSize = 0
-twitter-agent.sinks.HDFS.hdfs.rollCount = 10000
-twitter-agent.sinks.HDFS.hdfs.useLocalTimeStamp = true
-twitter-agent.channels.MemChannel.type = memory
-twitter-agent.channels.MemChannel.capacity = 10000
-twitter-agent.channels.MemChannel.transactionCapacity = 100
+agent.sources = Twitter
+agent.channels = MemChannel1 MemChannel2
+agent.sinks =HDFS MongoDB
+
+agent.sources.Twitter.type = com.orienit.kalyan.flume.source.KalyanTwitterSource
+agent.sources.Twitter.channels = MemChannel1
+agent.sources.Twitter.channels = MemChannel2
+agent.sources.Twitter.consumerKey = KjmrdExoo8lDZZRXGoX79sWon
+agent.sources.Twitter.consumerSecret = 4gUFCA3HWFQKHwoKn1AFCfrgnhQ7Uy9NeLisLVmQG96BsZcHev
+agent.sources.Twitter.accessToken =  931562558636433408-EQwfBQdJLw7W8I0EiyOjvQYcpLbbTI3
+agent.sources.Twitter.accessTokenSecret = JXnyeedbJdN3fH0USzP3hdwO7WK6Xm9dnTuCbCsKqFwOo
+agent.sources.Twitter.keywords = hadoop, big data, analytics, bigdata, cloudera, data science, data
+scientiest, business intelligence, mapreduce, data warehouse, data warehousing, mahout, hbase,
+nosql, newsql, businessintelligence, cloudcomputing
+
+agent.channels.MemChannel1.type = memory
+agent.channels.MemChannel1.capacity = 1000
+agent.channels.MemChannel1.transactionCapacity = 100
+
+agent.channels.MemChannel2.type = memory
+agent.channels.MemChannel2.capacity = 1000
+agent.channels.MemChannel2.transactionCapacity = 100
+
+agent.sinks.HDFS.channel = MemChannel1
+agent.sinks.HDFS.type = hdfs
+agent.sinks.HDFS.hdfs.path = hdfs://localhost:8020/user/orienit/flume/tweets1
+agent.sinks.HDFS.hdfs.fileType = DataStream
+agent.sinks.HDFS.hdfs.writeFormat = Json
+agent.sinks.HDFS.hdfs.batchSize = 1000
+agent.sinks.HDFS.hdfs.rollSize = 0
+agent.sinks.HDFS.hdfs.rollCount = 10000
+agent.sinks.HDFS.hdfs.useLocalTimeStamp = true
+
+agent.sinks.MongoDB.type = com.orienit.kalyan.flume.sink.KalyanMongoSink
+agent.sinks.MongoDB.hostNames = localhost
+agent.sinks.MongoDB.database = flume1
+agent.sinks.MongoDB.collection = twitter
+agent.sinks.MongoDB.batchSize = 10
 
 
-
-command:::
-------------
- flume-ng agent --conf /usr/lib/flume-ng/conf/ -f /usr/lib/flume-ng/conf/twitter-agent.conf -Dflume.root.logger=DEBUG,console -n twitter-agent
+agent.sinks.HDFS.channel=Memchannel1
+agent.sinks.MongoDB.channel=Memchannel2
 
 
-Creating hive table::
-
-add jar /usr/lib/avro/avro.jar
-
-CREATE EXTERNAL TABLE IF NOT EXISTS twitter( data string )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
-STORED AS
-INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
-OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat';
-
-LOAD DATA INPATH '/user/orienit/flume/tweets/FlumeData.1517536226280' INTO TABLE twitter;
-
-
-
-
-
-
-
+flume-ng agent --conf /usr/lib/flume-ng/conf/ -f /usr/lib/flume-ng/conf/streamingTask_1.conf -Dflume.root.logger=DEBUG,console -n agent
