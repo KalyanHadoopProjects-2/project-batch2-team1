@@ -5,10 +5,10 @@ agent.sinks =HDFS MongoDB
 agent.sources.Twitter.type = com.orienit.kalyan.flume.source.KalyanTwitterSource
 agent.sources.Twitter.channels = MemChannel1
 agent.sources.Twitter.channels = MemChannel2
-agent.sources.Twitter.consumerKey = KjmrdExoo8lDZZRXGoX79sWon
-agent.sources.Twitter.consumerSecret = 4gUFCA3HWFQKHwoKn1AFCfrgnhQ7Uy9NeLisLVmQG96BsZcHev
-agent.sources.Twitter.accessToken =  931562558636433408-EQwfBQdJLw7W8I0EiyOjvQYcpLbbTI3
-agent.sources.Twitter.accessTokenSecret = JXnyeedbJdN3fH0USzP3hdwO7WK6Xm9dnTuCbCsKqFwOo
+agent.sources.Twitter.consumerKey = KjmrdExoo8lDZRXGoX79sWon
+agent.sources.Twitter.consumerSecret = 4gUFCA3HWFQHwoKn1AFCfrgnhQ7Uy9NeLisLVmQG96BsZcHev
+agent.sources.Twitter.accessToken =  93156255863643408-EQwfBQdJLw7W8I0EiyOjvQYcpLbbTI3
+agent.sources.Twitter.accessTokenSecret = JXnyeedbJd3fH0USzP3hdwO7WK6Xm9dnTuCbCsKqFwOo
 agent.sources.Twitter.keywords = hadoop, big data, analytics, bigdata, cloudera, data science, data
 scientiest, business intelligence, mapreduce, data warehouse, data warehousing, mahout, hbase,
 nosql, newsql, businessintelligence, cloudcomputing
