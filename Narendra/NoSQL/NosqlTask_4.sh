@@ -1,4 +1,4 @@
-Run in normal command prompt
+[Run in normal command prompt
 ----------------------------------------
 mongoimport --db kalyan --collection employee1_json --file /home/orienit/Desktop/Narendra/nosql/employee1.json
 mongoimport --db kalyan --collection employee2_json --file /home/orienit/Desktop/Narendra/nosql/employee2.json
